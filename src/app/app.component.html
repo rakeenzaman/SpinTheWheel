@@ -1,0 +1,32 @@
+<ng-template #popup>
+  The wheel has chosen {{chosenItem}}!
+</ng-template>
+
+<ng-template #customBackgroundModal>
+  <div class="header">Add a custom background image</div>
+  <div class="body">Find an image online, right-click it and click "Copy image address", and then paste it here!</div>
+  <div class="form">
+    <input type="text" id="customUrlTextBoxValue" name="customUrlTextBoxValue" [(ngModel)]="customUrlTextBoxValue" [value]="customUrlTextBoxValue">
+    <button (click)="setCustomBackground()">SUBMIT</button>
+  </div>
+</ng-template>
+
+<div class="container">
+  <button (click)="openCustomBackgroundModal()" class="set-wheel-background-btn">{{customBackground ? 'Reset wheel background' : 'Set custom wheel background'}}</button>
+  <button (click)="spin()" class="spin-wheel-btn">Spin Wheel!</button>
+  <div class="wheel" id="wheel">
+    <div class="names" [ngStyle]="{'background-image': customBackground ? 'url(' + customBackground + ')' : ''}">
+      <div class="name" *ngFor="let name of names; let i = index" [class.custom-background]="customBackground">
+        <div class="child" [ngStyle]="{'transform': 'rotate(' + (i/(names.length) * 360) + 'deg)'}">{{name}}</div>
+      </div>
+    </div>
+  </div>
+
+  <input type="text" id="enterName" name="enterName" [(ngModel)]="textbox" [value]="textbox">
+  <button (click)="submit()">submit</button>
+  <div class="list" *ngFor="let name of names; let i = index">
+    <div>{{name}}</div>
+    <div class="x"(click)="names.splice(i, 1)">✕</div>
+  </div>
+</div>
+<router-outlet />

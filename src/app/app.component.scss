@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.container {
+    margin: 0;
+    padding: 10px;
+}
+
+
+.wheel {
+    font-family: Roboto;
+    color: white;
+    border-radius: 50%;
+    width: 100%;
+    position: relative;
+    transition: transform 2s ease-in-out;
+    transform-origin: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    .names {
+        width: 500px;
+        height: 500px;
+        position: relative;
+        background: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%;
+        
+        .name {
+            font-size: 20px;
+            line-height: 20px;
+            width: 230px;
+            position: absolute;
+            top: calc(50% - 10px);
+            right: 50%;
+            transform-origin: right;
+            
+            &.custom-background {
+                mix-blend-mode: difference;
+            }
+            
+        }
+
+        .child {
+            transform-origin: right;
+            padding-right: auto;
+        }
+    }
+}
+
+.list{
+    padding: 8px;
+    margin: 4px;
+    border: 1px solid white;
+    border-radius: 8px;
+    width: fit-content;
+    font-size: 12px;
+    font-family: Roboto;
+    color: white;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    user-select: none;
+    
+    .x {
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+        &:hover {
+            color: red;
+            transition: 0.2s ease-in-out;
+        }
+    }
+}
+
+@keyframes rotateWheel {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(var(--rotation-angle));
+    }
+}
+
+@keyframes modalAnimation {
+    from {
+        transform: translateY(-100px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.set-wheel-background-btn, .spin-wheel-btn {
+    font-family: Roboto;
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: none;
+    border: 2px solid rgba(252,70,107,1);
+    font-weight: 700;
+    transition: 0.2s ease-in-out;
+    background: transparent;
+    color: rgba(252,70,107,1);
+
+    &:hover {
+        background: rgba(252,70,107,1);
+        color: black;
+        border: 2px solid rgba(252,70,107,1);
+        transition: 0.2s ease-in-out;
+    }
+}

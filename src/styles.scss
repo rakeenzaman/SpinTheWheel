@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+body {
+    margin: 0;
+    background: linear-gradient(180deg, rgba(27,30,42,1) 0%, rgba(13,13,13,1) 100%);
+    overflow: hidden;
+}
+
+.custom-modal {
+    .modal-dialog {
+        max-width: 80vw;
+        .modal-content {
+            font-family: Roboto;
+            font-weight: 700;
+            text-align: center;
+            background: none;
+            border: none;
+            color: #44caff;
+            font-size: 80px;
+        }
+    }
+}
+
+.custom-background-modal {
+    .modal-dialog {
+        max-width: 500px;
+        .modal-content {
+            font-family: Roboto;
+            font-weight: 700;
+            text-align: center;
+            border: none;
+            padding: 22px;
+            border-radius: 30px;
+
+            .header {
+                font-size: 24px;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+
+            .body {
+                font-size: 16px;
+                font-weight: 400;
+                margin-bottom: 20px;
+            }
+
+            .form {
+                display: flex;
+                justify-content: center;
+                gap: 14px;
+
+                input {
+                    width: 100%;
+                    border-radius: 10px;
+                    border: 1px solid black;
+                    padding: 4px;
+                }
+
+                button {
+                    padding: 0 26px;
+                    border: none;
+                    border-radius: 10px;
+                    background: #44caff;
+                    color: white;
+                    font-size: 16px;
+                    font-weight: 700;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
