@@ -19,8 +19,8 @@ export class AppComponent implements AfterViewInit {
   names: string[] = [];
   constructor(private ngbModal: NgbModal) {
     // initializing audio files
-    this.yay.src = "../assets/yay.mp3";
-    this.goofyahh.src = "../assets/goofyahh.mp3";
+    this.yay.src = "assets/yay.mp3";
+    this.goofyahh.src = "assets/goofyahh.mp3";
     this.yay.volume = 0.2;
     this.goofyahh.volume = 0.1;
     this.yay.load();
