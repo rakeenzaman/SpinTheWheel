@@ -1,16 +1,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/beat-tech');
 
-.container {
+.app-container {
     margin: 0;
     padding: 10px;
 }
 
+.main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    @media (max-width: 1000px) {
+        flex-direction: column;
+    }
+}
+
+.title {
+    text-align: center;
+    font-size: 36px;
+    line-height: 36px;
+    font-weight: 600;
+    color: #44caff;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 16px;
+    line-height: 36px;
+    color: rgba(252,70,107,1);
+    margin-bottom: 50px;
+}
+
+.wheel-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+.wheel-wrapper-for-arrow {
+    position: relative;
+
+    .arrow-right {
+        position: absolute;
+        top: calc(50% - 30px);
+        left: -46px;
+        width: 0; 
+        height: 0; 
+        border-top: 30px solid transparent;
+        border-bottom: 30px solid transparent;
+        border-left: 60px solid #ffb544;
+        z-index: 2;
+      }
+}
 
 .wheel {
+    .enter-2 {
+        font-size: 24px;
+        position: absolute;
+    }
     font-family: Roboto;
     color: white;
     border-radius: 50%;
-    width: 100%;
     position: relative;
     transition: transform 2s ease-in-out;
     transform-origin: center;
@@ -19,8 +76,16 @@
     align-items: center;
     user-select: none;
     .names {
+        @media (min-width: 1600px) {
+            width: 650px;
+            height: 650px
+        }
         width: 500px;
         height: 500px;
+        @media (max-width: 540px) {
+            width: 300px;
+            height: 300px
+        }
         position: relative;
         background: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
         background-size: cover;
@@ -35,9 +100,34 @@
             top: calc(50% - 10px);
             right: 50%;
             transform-origin: right;
+            @media (min-width: 1600px) {
+                width: 300px
+            }
+
+            @media (max-width: 540px) {
+                top: calc(50% - 7px);
+                width: 140px;
+                font-size: 14px;
+                line-height: 14px;
+            }
             
             &.custom-background {
                 mix-blend-mode: difference;
+            }
+
+            &.make-smaller {
+                font-size: 14px;
+                line-height: 14px;
+            }
+
+            &.make-even-smaller {
+                font-size: 10px;
+                line-height: 10px;
+
+                @media (max-width: 540px) {
+                    font-size: 7px;
+                    line-height: 7px;
+                }
             }
             
         }
@@ -49,26 +139,96 @@
     }
 }
 
-.list{
-    padding: 8px;
-    margin: 4px;
-    border: 1px solid white;
-    border-radius: 8px;
-    width: fit-content;
-    font-size: 12px;
-    font-family: Roboto;
+.spin-the-wheel-text {
     color: white;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    user-select: none;
-    
-    .x {
+    font-family: 'Beat Tech';
+    text-align: center;
+    font-size: 64px;
+    line-height: 64px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
         cursor: pointer;
-        transition: 0.2s ease-in-out;
-        &:hover {
-            color: red;
+        transition: all 0.2s ease-in-out;
+        color: red;
+        transform: rotate3d(1, 1, 0, 30deg);
+    }
+}
+
+.input-and-list {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    .name-input-container {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+    
+        .name-input {
+            width: 100%;
+            color: rgba(252,70,107,1);
+            border: 2px solid rgba(252,70,107,1);
+            outline: none;
+            background-color: transparent;
+            border-radius: 12px;
+            padding: 4px;
+            padding-left: 12px;
+        }
+        
+        .name-submit {
+            width: 90px;
+            color: rgba(252,70,107,1);
+            border: 2px solid rgba(252,70,107,1);
+            outline: none;
+            background-color: transparent;
+            padding: 4px 12px;
+            font-weight: 600;
+            border-radius: 12px;
             transition: 0.2s ease-in-out;
+        
+            &:hover {
+                background: rgba(252,70,107,1);
+                color: black;
+                transition: 0.2s ease-in-out;
+            }
+        }
+    }
+    
+    .list-container {
+        padding: 10px;
+        border: 1px solid rgba(252,70,107,1);
+        border-radius: 12px;
+        width: auto;
+        height: 300px;
+        overflow-y: scroll;
+        scrollbar-color: rgba(252,70,107,1) transparent;
+        .list{
+            position: relative;
+            padding: 12px;
+            padding-right: 36px;
+            margin: 4px;
+            border: 1px solid white;
+            border-radius: 8px;
+            width: auto;
+            font-size: 12px;
+            font-family: Roboto;
+            color: white;
+            align-items: center;
+            user-select: none;
+            overflow: hidden;
+            
+            .x {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                cursor: pointer;
+                transition: 0.2s ease-in-out;
+                &:hover {
+                    color: rgba(252,70,107,1);
+                    transition: 0.2s ease-in-out;
+                }
+            }
         }
     }
 }
@@ -91,14 +251,13 @@
     }
 }
 
-.set-wheel-background-btn, .spin-wheel-btn {
+.spin-wheel-btn, .clear-btn {
     font-family: Roboto;
     padding: 10px 20px;
     border-radius: 12px;
-    border: none;
     border: 2px solid rgba(252,70,107,1);
     font-weight: 700;
-    transition: 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     background: transparent;
     color: rgba(252,70,107,1);
 
@@ -107,5 +266,158 @@
         color: black;
         border: 2px solid rgba(252,70,107,1);
         transition: 0.2s ease-in-out;
+
+        svg {
+            fill: black;
+            transition: 0.2s ease-in-out;
+        }
+    }
+
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.3;
+    }
+
+    svg {
+        transition: 0.2s ease-in-out;
+        width: 16px;
+        fill: rgba(252,70,107,1);
+    }
+}
+
+.set-wheel-background-btn {
+    width: fit-content;
+    font-family: Roboto;
+    font-size: 14px;
+    padding: 8px 24px;
+    border-radius: 12px;
+    border: none;
+    border: 2px solid #ffb544;
+    font-weight: 700;
+    transition: all 0.2s ease-in-out;
+    background: transparent;
+    color: #ffb544;
+
+    &:hover {
+        background: #ffb544;
+        color: black;
+        border: 2px solid #ffb544;
+        transition: 0.2s ease-in-out;
+
+        svg {
+            fill: black;
+            transition: 0.2s ease-in-out;
+        }
+    }
+}
+
+.clear-btn {
+    width: 80px;
+    margin: auto;
+}
+
+.selected-popup {
+    .modal-dialog {
+        @media (min-width: 540px) {
+            max-width: 80vw;
+        }
+        .modal-content {
+            font-family: Roboto;
+            font-weight: 700;
+            text-align: center;
+            background: none;
+            border: none;
+            color: #44caff;
+            font-size: 70px;
+
+            @media (max-width: 540px) {
+                font-size: 40px;
+            }
+        }
+    }
+}
+
+.reset-buttons {
+    font-family: Roboto;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin: auto;
+    margin-top: 30px;
+
+    @media (max-width: 540px) {
+        flex-direction: column;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 8px 20px;
+        border-radius: 12px;
+        border: 2px solid rgba(252,70,107,1);
+        font-weight: 700;
+        transition: all 0.2s ease-in-out;
+        background: transparent;
+        color: rgba(252,70,107,1);
+        transition: 0.2s ease-in-out;
+        background: rgba(0 0 0 / 0.5);
+
+        &:hover {
+            background: rgba(252,70,107,1);
+            color: black;
+            border: 2px solid rgba(252,70,107,1);
+            transition: 0.2s ease-in-out;
+        }
+    }
+}
+
+.custom-background-modal {
+    .modal-dialog {
+        max-width: 500px;
+        .modal-content {
+            font-family: Roboto;
+            font-weight: 700;
+            text-align: center;
+            border: none;
+            padding: 22px;
+            border-radius: 30px;
+
+            .header {
+                font-size: 24px;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+
+            .body {
+                font-size: 16px;
+                font-weight: 400;
+                margin-bottom: 20px;
+            }
+
+            .form {
+                display: flex;
+                justify-content: center;
+                gap: 14px;
+
+                input {
+                    width: 100%;
+                    border-radius: 10px;
+                    border: 1px solid #44caff;
+                    outline: none;
+                    padding: 4px;
+                    padding-left: 10px;
+                }
+
+                button {
+                    padding: 0 26px;
+                    border: none;
+                    border-radius: 10px;
+                    background: #44caff;
+                    color: white;
+                    font-size: 16px;
+                    font-weight: 700;
+                    cursor: pointer;
+                }
+            }
+        }
     }
 }

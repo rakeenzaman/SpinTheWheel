@@ -1,5 +1,9 @@
 <ng-template #popup>
   The wheel has chosen {{chosenItem}}!
+  <div class="reset-buttons">
+    <button (click)="closePopupAndRemoveItem()">Remove {{chosenItem}} from list</button>
+    <button (click)="closePopup()">Keep {{chosenItem}}</button>
+  </div>
 </ng-template>
 
 <ng-template #customBackgroundModal>
@@ -7,26 +11,47 @@
   <div class="body">Find an image online, right-click it and click "Copy image address", and then paste it here!</div>
   <div class="form">
     <input type="text" id="customUrlTextBoxValue" name="customUrlTextBoxValue" [(ngModel)]="customUrlTextBoxValue" [value]="customUrlTextBoxValue">
-    <button (click)="setCustomBackground()">SUBMIT</button>
+    <button (click)="setCustomBackground()">Submit</button>
   </div>
 </ng-template>
 
-<div class="container">
-  <button (click)="openCustomBackgroundModal()" class="set-wheel-background-btn">{{customBackground ? 'Reset wheel background' : 'Set custom wheel background'}}</button>
-  <button (click)="spin()" class="spin-wheel-btn">Spin Wheel!</button>
-  <div class="wheel" id="wheel">
-    <div class="names" [ngStyle]="{'background-image': customBackground ? 'url(' + customBackground + ')' : ''}">
-      <div class="name" *ngFor="let name of names; let i = index" [class.custom-background]="customBackground">
-        <div class="child" [ngStyle]="{'transform': 'rotate(' + (i/(names.length) * 360) + 'deg)'}">{{name}}</div>
-      </div>
-    </div>
-  </div>
+<div class="app-container">
+  <div class="title">Spin The Wheel</div>
+  <div class="subtitle">Created in Angular using CSS and some math 🤓</div>
+  <div class="main-container">
+    <div class="wheel-container">
+      <div class="wheel-wrapper-for-arrow">
+        <div class="arrow-right"></div>
+        <div class="wheel" id="wheel">
+          <div class="names" [ngStyle]="{'background-image': customBackground ? 'url(' + customBackground + ')' : ''}">
+            <div class="name" *ngFor="let name of names; let i = index" [class.custom-background]="customBackground" [class.make-smaller]="name.length > 16" [class.make-even-smaller]="name.length > 24">
+              <div *ngIf="names.length >= 2" class="child" [ngStyle]="{'transform': 'rotate(' + (i/(names.length) * 360) + 'deg)'}">{{name}}</div>
+            </div>
+          </div>
+          <div class="enter-2" *ngIf="names.length < 2">Enter at least 2 items!</div>
+        </div>
 
-  <input type="text" id="enterName" name="enterName" [(ngModel)]="textbox" [value]="textbox">
-  <button (click)="submit()">submit</button>
-  <div class="list" *ngFor="let name of names; let i = index">
-    <div>{{name}}</div>
-    <div class="x"(click)="names.splice(i, 1)">✕</div>
+      </div>
+      <button (click)="openCustomBackgroundModal()" class="set-wheel-background-btn">{{customBackground ? 'Reset wheel background' : 'Set custom wheel background'}}</button>
+    </div>
+  
+    <div class="input-and-list">
+      <button (click)="spin()" class="spin-wheel-btn" [class.disabled]="names.length < 2">Spin Wheel!</button>
+      <div class="name-input-container">
+        <input class="name-input" type="text" id="enterName" name="enterName" [(ngModel)]="textbox" [value]="textbox" placeholder="Enter a name!" maxlength="32">
+        <button (click)="submit()" class="name-submit">Submit</button>
+      </div>
+    
+      <div class="list-container" *ngIf="names.length > 0">
+        <div class="list" *ngFor="let name of names; let i = index">
+          <div>{{name}}</div>
+          <div class="x"(click)="removeItem(i)">✕</div>
+        </div>
+      </div>
+      <button (click)="clearList()" class="clear-btn" *ngIf="names.length > 0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0L284.2 0c12.1 0 23.2 6.8 28.6 17.7L320 32l96 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 96C14.3 96 0 81.7 0 64S14.3 32 32 32l96 0 7.2-14.3zM32 128l384 0 0 320c0 35.3-28.7 64-64 64L96 512c-35.3 0-64-28.7-64-64l0-320zm96 64c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16z"/></svg>
+      </button>
+    </div>
   </div>
 </div>
 <router-outlet />
